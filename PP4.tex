@@ -1,0 +1,202 @@
+%==================================================
+%      PREAMBOLO e DICHIARAZIONI INIZIALI
+%==================================================
+\documentclass[10pt,oneside,a4paper]{article}
+
+\usepackage[latin1]{inputenc} 
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{siunitx} %Inserisce automaticamente i dati con le unità  di misura correttamente formattate del SI (utilizzo: \SI{0.82}{m^2}, in generale \SI{misura con il punto decimale}{unità  di misura})
+\sisetup{output-decimal-marker = {.}, separate-uncertainty = true, input-uncertainty-signs = \pm, detect-weight=true, detect-family=true} %per usare SI con il punto decimale
+\usepackage{listings} %Per citare codice informatico formattandolo correttamente
+\usepackage{amsmath,amsthm,verbatim,amssymb,amsfonts,amscd,graphicx,mathtools}
+\usepackage[makeroom]{cancel}
+\newcommand{\abs}[1]{\left\lvert\,#1\,\right\rvert}
+\usepackage{geometry}
+\usepackage{epigraph}
+\usepackage{booktabs}	%tabelle migliorate
+\usepackage{tablefootnote}	%note a piè di pagina in tabella
+\usepackage{threeparttable} %tabella con note a piè di tabella
+\usepackage{caption}	%descrizione per figure
+\usepackage{dblfnote}
+\captionsetup{tableposition=top,figureposition=bottom,font=small} %setup descrizione
+\usepackage{float}
+\usepackage{esvect} %vettori
+\usepackage{longtable} %tabelle lunghe
+\usepackage[dvipsnames]{xcolor}
+\definecolor{sepia}{HTML}{80002A}
+\usepackage[colorlinks=true, citecolor=black, linkcolor=sepia, urlcolor=black]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{circuitikz}
+
+
+\usepackage{multicol}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\cov}{\operatorname{cov}}
+
+
+\usepackage{listings} %Per inserire codice
+\lstnewenvironment{codice_c}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{red}\bfseries, commentstyle=\color{blue},
+language=C, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox,  showstringspaces=false, #1}}{}
+
+%==================================================
+%                  PRIMA PAGINA
+%==================================================
+
+\title{\textsc{\textbf{Esercitazione 4}: Amplificatore operazionale 2}}
+\author{\small{G. Galbato Muscio} \and \small{L. Gravina} \and \small{L. Graziotto}}
+\date{6 Novembre 2018}
+
+\begin{document}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5, trim={2.8cm 8.9cm 0 9cm}, clip]{logo.png}
+	\end{figure}
+	\maketitle
+	\begin{center} 
+		\fbox{{\fontsize{12pt}{8mm}\textsc{Gruppo 11}}} \\
+	\end{center}
+\hrule
+\vspace{0.5cm}
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+Si realizzano un amplificatore differenziale e un sommatore non invertente utilizzando l'amplificatore operazionale LM358.
+\end{abstract}
+\vspace{4cm}
+\tableofcontents %Indice
+\newpage
+
+
+\pagebreak
+\begin{multicols}{2}
+%==================================================
+%      		AMPLIFICATORE DIFFERENZIALE
+%==================================================
+\section{Amplificatore differenziale}
+Si utilizza nel seguito l'amplificatore operazionale LM358, e lo si alimenta con una differenza di potenziale di $\pm \SI{15}{V}$, connettendo gli ingressi \texttt{V+} e \texttt{GND} alla doppia alimentazione in continua, positiva e negativa. 
+
+Si realizza un amplificatore differenziale con guadagno $G = 5$, come nel circuito seguente.
+
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[op amp] (opamp) {}
+(opamp.+) to[R=$R_1'$] ++(-2,0) node[circ] {} node[left] {$v_\text{2}$}
+(opamp.-) to[short] ++(0, 1.25) to[R = $R_2$] ++(2,0) -| (opamp.out)
+(opamp.-) node[circ] {}
+(opamp.+) node[circ] {}
+(opamp.-) to[R=$R_1$] ++(-2,0) node[circ] {} node[left] {$v_1$}
+(opamp.out) to[short, *-*] ++(0.5,0) node[right] {$v_\text{o}$}
+(opamp.+) to[R=$R_2'$] ++(0,-2) node[ground] {}
+;\end{circuitikz}
+\end{center}
+
+Scegliendo $R_1 = R_1'$ e $R_2 = R_2'$ si ha la relazione 
+\[
+v_o = \frac{R_2}{R_1}(v_2-v_1),
+\]
+ovvero il segnale in uscita è proporzionale alla differenza tra i segnali in ingresso. Pertanto si costruirà un circuito in cui i valori di $R_1$ e $R_1'$ e di $R_2$ e $R_2'$ siano il più simili possibile, e si sceglierà $R_2 / R_1 =: G = 5$. 
+
+Le resistenze utilizzate, misurate con il multimetro, sono
+\[
+\begin{aligned}
+R_1 &= \SI{111 \pm 111}{k\ohm} \\
+R_1' &= \SI{111 \pm 111}{k\ohm} \\
+R_2 &= \SI{111 \pm 111}{k\ohm} \\
+R_2' &= \SI{111 \pm 111}{k\ohm}.
+\end{aligned}
+\]
+
+Si misurano quindi l'amplificazione di modo comune $A_c$ e l'amplificazione differenziale $A_d$, nonché il Common Mode Rejection Ratio (CMRR), $\rho = \abs{A_d / A_c}$, e li si confronta con i loro valori attesi dati i componenti del circuito e con quelli caratteristici di un amplificatore differenziale ideale.
+
+Per misurare $A_c$ si invia lo stesso segnale ai due ingressi, ossia un segnale sinusoidale di frequenza $f$ e ampiezza $V_i = \SI{111 \pm 111}{V}$, che è abbastanza grande per osservare l'attenuazione data dal piccolo valore di $A_c$ e minore di \SI{111}{V}, valore oltre il quale si osservano distorsioni. Si riportano in tabella~\ref{tab:Ac_differenziale} le misure compiute a diverse frequenze. Il valor medio con associata la deviazione standard è
+\[
+A_c = 111 \pm 111.
+\]
+
+
+\begin{center}
+\captionof{table}{Misure per la stima di $A_c$}
+\label{tab:Ac_differenziale}
+\begin{tabular}{c|c|c|c}
+$f$ [\SI{}{kHz}] & $V_i$ [\SI{}{V}] & $v_o$ [\SI{}{V}] & $A_c = v_o / V_i$ \\
+\hline
+\hline
+\end{tabular}
+\end{center}
+
+Per misurare $A_d$ si devono invece ricavare singolarmente le amplificazioni $A_1$ e $A_2$, inviando un solo segnale ad un ingresso e mettendo a terra l'altro. Inviando il segnale a $v_1$ e mettendo a terra $v_2$ si avrà un amplificatore invertente, dunque ci si aspetta di ottenere 
+\[
+A_1 = -\frac{R_2}{R_1}.
+\]
+Inviando il segnale a $v_2$ e mettendo a terra $v_1$, invece, si avrà un amplificatore non invertente, dunque ci si aspetta di ottenere 
+\[
+A_2 = \frac{R_2'}{R_1}\frac{R_1+R_2}{R_1'+R_2'}.
+\] 
+
+Si invia dunque alternativamente ad un ingresso e poi all'altro (mettendo a terra quello non usato) un segnale sinusoidale di ampiezza $v_{1,2}$ e frequenza $f$, e si misura l'uscita $v_o$ sul canale \texttt{CH2} dell'oscilloscopio. Quindi si ricavano $A_1 = v_o / v_{1,2}$ e $A_2 = v_o / v_{1,2}$ e l'amplificazione differenziale $A_d = (A_1 - A_2) / 2$. Si riportano in tabella~\ref{tab:Ad_differenziale} le misure compiute a diverse frequenze.
+
+\begin{table*}
+\begin{center}
+\captionof{table}{Misure per la stima di $A_d$}
+\label{tab:Ad_differenziale}
+\begin{tabular}{c|c|c|c|c|c|c}
+$f$ [\SI{}{kHz}] & $v_{1,2}$ [\SI{}{V}] & $v_o$ (con $v_2 = 0$) [\SI{}{V}] & $v_o$ (con $v_1 = 0$) [\SI{}{V}] & $A_1$ & $A_2$ & $A_d$\\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+
+Si hanno come valori medi delle amplificazioni di singolo canale 
+\[
+\begin{aligned}
+A_1 &= 111 \pm 111 \\
+A_2 &= 111 \pm 111
+\end{aligned}
+\]
+compatibili con i valori attesi dati i componenti usati $A_1 = 111 \pm 111$ e $A_2 = 111 \pm 111$. Il valore medio dell'amplificazione differenziale, con associata incertezza data dalla deviazione standard, è
+\[
+A_d = 111 \pm 111,
+\]
+compatibile con il valore atteso dati i componenti di $A_d = 111 \pm 111$. Si può confrontare anche il valore misurato di $A_c$ con quello atteso $A_c = A_1 + A_2 = 111 \pm 111$, osservando che essi sono compatibili.
+
+Si nota inoltre che il valore di $A_c$ è prossimo allo zero, mentre quello di $A_d$ al valore pari al guadagno $G = 5$, secondo il quale sono state scelte le resistenze all'inizio.
+
+Si stima quindi il CMRR 
+\[
+\rho = \abs{\frac{A_d}{A_c}} = 111 \pm 111,
+\]
+compatibile con il valore atteso di $\rho = 111 \pm 111$. Si osserva che questo valore è molto elevato, infatti nell'amplificatore differenziale ideale si dovrebbe avere $\rho \rightarrow \infty$.
+
+%==================================================
+%    		SOMMATORE NON INVERTENTE
+%==================================================
+\section{Sommatore non invertente}
+
+
+
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[op amp] (opamp) {}
+(opamp.+) -| ++(-0.5,-0.5) node[ground]{}
+(opamp.out) to[short, *-*] ++(0.5,0) node[right] {$V_\text{o}$}
+(opamp.-) to[short] ++(-0.25,0) to[R=$R$] ++(-1.5,0) node[] (Vs) {} ++(0,-2) node[] (ground) {}
+(ground) node[ground] {} to[sV = $V_s$, invert] (Vs)
+(opamp.-) -| ++(0,1) to[R = $R'$] ++(1.5,0) -| (opamp.out)
+(opamp.-) node[circ] {}
+;\end{circuitikz}
+\end{center}
+
+
+
+
+\end{multicols}
+\end{document}
