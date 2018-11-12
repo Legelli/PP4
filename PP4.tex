@@ -180,20 +180,35 @@ compatibile con il valore atteso di $\rho = 111 \pm 111$. Si osserva che questo 
 %    		SOMMATORE NON INVERTENTE
 %==================================================
 \section{Sommatore non invertente}
-
-
+Si realizza un circuito sommatore non invertente a due ingressi, come indicato nella figura seguente.
 
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) node[op amp] (opamp) {}
-(opamp.+) -| ++(-0.5,-0.5) node[ground]{}
 (opamp.out) to[short, *-*] ++(0.5,0) node[right] {$V_\text{o}$}
-(opamp.-) to[short] ++(-0.25,0) to[R=$R$] ++(-1.5,0) node[] (Vs) {} ++(0,-2) node[] (ground) {}
-(ground) node[ground] {} to[sV = $V_s$, invert] (Vs)
-(opamp.-) -| ++(0,1) to[R = $R'$] ++(1.5,0) -| (opamp.out)
+(opamp.-) to[short] ++(-0.25,0) to[R=$R$] ++(-1.5,0) node[ground] {}
+(opamp.-) -| ++(0,1) to[R = $R'$] ++(2,0) -| (opamp.out)
 (opamp.-) node[circ] {}
+(opamp.+) to[R=$R_A$] ++(-2,0) node[circ] {} node[left]{$V_A$}
+(opamp.+) node[circ] {}
+(opamp.+) to[short] ++(0,-1) to[R=$R_B$] ++(-2,0) node[circ] {} node[left]{$V_B$}
 ;\end{circuitikz}
 \end{center}
+
+I valori delle resistenze utilizzate, misurati con il multimetro, sono
+\[
+\begin{aligned}
+R_A &= \SI{111 \pm 111}{k\ohm} \\
+R_B &= \SI{111 \pm 111}{k\ohm} \\
+R &= \SI{111 \pm 111}{k\ohm} \\
+R' &= \SI{111 \pm 111}{k\ohm}; 
+\end{aligned}
+\]
+
+si sono scelte resistenze tutte simili tra loro in modo che valga la relazione
+\[
+
+\]
 
 
 
