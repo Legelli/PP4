@@ -121,13 +121,13 @@ Per misurare $A_c$ si invia lo stesso segnale ai due ingressi, ossia un segnale 
 A_c = \SI{3.01 \pm 0.08 e-3}{}.
 \]
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{Istantanea dell'oscilloscopio per l'amplificatore differenziale, misura di $A_c$}
-%	\label{fig:Ac_differenziale}
-%	\end{center}
-%\end{Figure}
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{comune.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio per l'amplificatore differenziale, misura di $A_c$}
+	\label{fig:Ac_differenziale}
+	\end{center}
+\end{Figure}
 
 \begin{center}
 \captionof{table}{Misure per la stima di $A_c$}
@@ -135,6 +135,11 @@ A_c = \SI{3.01 \pm 0.08 e-3}{}.
 \begin{tabular}{c|c|c|c}
 $f$ [\SI{}{Hz}] & $V_i$ [\SI{}{V}] & $v_o$ [\SI{}{mV}] & $A_c = v_o / V_i$ \\
 \hline
+      149.5 &        3.90 &         11.3 & 2.90e-03 \\
+      222.0 &        3.90 &         11.5 & 2.95e-03 \\
+      281.0 &        3.90 &         11.8 & 3.03e-03 \\
+      359.0 &        3.90 &         11.8 & 3.03e-03 \\
+      461.0 &        3.90 &         12.2 & 3.13e-03 \\
 \hline
 \end{tabular}
 \end{center}
@@ -150,21 +155,29 @@ A_2 = \frac{R_2'}{R_1}\frac{R_1+R_2}{R_1'+R_2'}.
 
 Si invia dunque alternativamente ad un ingresso e poi all'altro (mettendo a terra quello non usato) un segnale sinusoidale di ampiezza $v_{1,2}$ e frequenza $f$, e si misura l'uscita $v_o$ sul canale \texttt{CH2} dell'oscilloscopio. Per l'amplificatore invertente si osserva correttamente lo sfasamento di $\pi$ tra ingresso e uscita, come visibile nello screenshot di figura~\ref{fig:invertente_differenziale}. Quindi si ricavano $A_1 = v_o / v_1$ e $A_2 = v_o / v_2$ e l'amplificazione differenziale $A_d = (A_1 - A_2) / 2$. Si riportano in tabella~\ref{tab:Ad_differenziale} le misure compiute a diverse frequenze.
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{Istantanea dell'oscilloscopio per l'amplificatore differenziale, ingresso invertente}
-%	\label{fig:invertente_differenziale}
-%	\end{center}
-%\end{Figure}
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{differenziale.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio per l'amplificatore differenziale, ingresso invertente}
+	\label{fig:invertente_differenziale}
+	\end{center}
+\end{Figure}
 
 \begin{table*}
 \begin{center}
 \captionof{table}{Misure per la stima di $A_d$}
 \label{tab:Ad_differenziale}
 \begin{tabular}{c|c|c|c|c|c|c|c}
-$f$ [\SI{}{kHz}] & $v_1$ ($v_2 = 0$) [\SI{}{V}] & $v_o$ ($v_2 = 0$) [\SI{}{V}] & $v_2$ ($v_1 = 0$) [\SI{}{V}] & $v_o$ ($v_1 = 0$) [\SI{}{V}] & $A_1$ & $A_2$ & $A_d$\\
+$f$ [\SI{}{kHz}] & $v_1$ ($v_2 = 0$) [\SI{}{mV}] & $v_o$ ($v_2 = 0$) [\SI{}{mV}] & $v_2$ ($v_1 = 0$) [\SI{}{mV}] & $v_o$ ($v_1 = 0$) [\SI{}{mV}] & $A_1$ & $A_2$ & $A_d$\\
 \hline
+      111.4 &             54.5 &           -250.0 &             54.8 &            250.0 &   -4.59 &    4.56 &   -4.57 \\
+      210.0 &             54.8 &           -248.0 &             55.6 &            250.0 &   -4.53 &    4.50 &   -4.51 \\
+      282.0 &             54.8 &           -248.0 &             55.0 &            250.0 &   -4.53 &    4.55 &   -4.54 \\
+      303.0 &             55.0 &           -250.0 &             55.4 &            250.0 &   -4.55 &    4.51 &   -4.53 \\
+      363.0 &             54.4 &           -250.0 &             55.4 &            250.0 &   -4.60 &    4.51 &   -4.55 \\
+      398.0 &             54.8 &           -249.0 &             55.6 &            250.0 &   -4.54 &    4.50 &   -4.52 \\
+      460.0 &             55.0 &           -250.0 &             55.2 &            251.0 &   -4.55 &    4.55 &   -4.55 \\
+      605.0 &             54.8 &           -249.0 &             55.4 &            250.0 &   -4.54 &    4.51 &   -4.53 \\
 \hline
 \end{tabular}
 \end{center}
@@ -244,6 +257,9 @@ Si misurano le amplificazioni dei singoli ingressi, inviando un segnale sinusoid
 \begin{tabular}{c|c|c|c|c|c}
 $f$ [\SI{}{kHz}] & $V_{A,B}$ [\SI{}{V}] & $V_o$ (con $V_B = 0$) [\SI{}{V}] & $V_o$ (con $V_A = 0$) [\SI{}{V}] & $A_A$ & $A_B$ \\
 \hline
+        277 &        3.82 &            3.84 &            3.84 &    1.01 &    1.01 \\
+        534 &        3.84 &            3.84 &            3.84 &    1.00 &    1.00 \\
+       1047 &        3.84 &            3.84 &            3.84 &    1.00 &    1.00 \\
 \hline
 \end{tabular}
 \end{center}
@@ -264,15 +280,15 @@ A_B^\text{\tiny{(atteso)}} &= \frac{R_A}{R_A + R_B} \frac{R' + R}{R} = 1.00 \pm 
 \end{aligned}
 \]
 
-Verifichiamo il comportamento del circuito inviando un segnale sinusoidale di frequenza $f = \SI{21.2 \pm 0.6}{kHz}$ e ampiezza picco-picco $V_\text{in} = \SI{2.28 \pm 0.07}{V}$ all'ingresso $A$ e un segnale continuo di \SI{5.00 \pm 0.03}{V}, ricavato dall'alimentatore, all'ingresso $B$. Si riporta in figura~\ref{fig:continua_sinusoidale} uno screenshot dell'oscilloscopio per questa configurazione: si osserva come il segnale sinusoidale sia traslato verso l'alto.
+Verifichiamo il comportamento del circuito inviando un segnale sinusoidale di frequenza $f = \SI{21.2 \pm 0.6}{kHz}$ e ampiezza picco-picco $V_\text{in} = \SI{2.28 \pm 0.07}{V}$ all'ingresso $A$ e un segnale continuo di \SI{5.00 \pm 0.03}{V}, ricavato dall'alimentatore, all'ingresso $B$. Si riporta in figura~\ref{fig:continua_sinusoidale} uno screenshot dell'oscilloscopio per questa configurazione: si osserva come il segnale sinusoidale sia traslato verso l'alto\footnote{È bene notare che i \emph{ground} dei due canali sono allineati e che le scale di tensione sono coerenti.}.
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{}
-%	\label{fig:continua_sinusoidale}
-%	\end{center}
-%\end{Figure}
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{shift.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio in cui è visibile la somma di una sinusoide (in basso) con un segnale in continua di \SI{5}{V}}
+	\label{fig:continua_sinusoidale}
+	\end{center}
+\end{Figure}
 
 Si inviano dunque ai due ingressi due segnali sinusoidali di medesima ampiezza $V_\text{in} = \SI{848 \pm 25}{mV}$ e frequenze rispettivamente di $f_1 = \SI{1.15 \pm 0.03}{kHz}$ e $f_2 = \SI{1.09 \pm 0.03}{kHz}$; si osserva in uscita il fenomeno dei battimenti, ovvero si ha una $V_o$ sinusoidale la cui ampiezza varia seguendo una sinusoide di frequenza minore.
 
@@ -280,33 +296,37 @@ Si può stimare la frequenza dell'inviluppo con i cursori (e avendo cura di impos
 \[
 f_\text{inv}^\text{\tiny{(atteso)}} = \frac{f_1 - f_2}{2} = \SI{30 \pm 2}{Hz}, 
 \]
-e si osserva che sono compatibili. Si riporta in figura~\ref{fig:battimenti_ingresso} lo screenshot per i due segnali in ingresso: si nota che essi hanno frequenza di poco differente, osservando lo sfasamento progressivo lungo la schermata dei massimi. Si riporta invece in figura~\ref{fig:battimenti_uscita} lo screenshot del segnale in uscita: è evidente l'inviluppo dei due, che procede alla frequenza $f_\text{inv}$ stimata precedentemente.
+e si osserva che sono compatibili. Si riporta in figura~\ref{fig:battimenti_ingresso} lo screenshot per i due segnali in ingresso: si nota che essi hanno frequenza di poco differente, osservando lo sfasamento progressivo lungo la schermata dei massimi. 
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{Istantanea dell'oscilloscopio per il fenomeno dei battimenti, segnali in ingresso}
-%	\label{fig:battimenti_ingresso}
-%	\end{center}
-%\end{Figure}
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{battimentiIngresso.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio per il fenomeno dei battimenti, segnali in ingresso}
+	\label{fig:battimenti_ingresso}
+	\end{center}
+\end{Figure}
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{Istantanea dell'oscilloscopio per il fenomeno dei battimenti, segnale in uscita}
-%	\label{fig:battimenti_uscita}
-%	\end{center}
-%\end{Figure}
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{battimenti5.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio per il fenomeno dei battimenti, segnale in uscita}
+	\label{fig:battimenti_uscita}
+	\end{center}
+\end{Figure}
+
+Si riporta invece in figura~\ref{fig:battimenti_uscita} lo screenshot del segnale in uscita: è evidente l'inviluppo dei due, che procede alla frequenza $f_\text{inv}$ stimata precedentemente.
+
+\begin{Figure}
+	\begin{center}
+	\includegraphics[width=\linewidth]{quadraSinusoide.png}
+	\captionof{figure}{Istantanea dell'oscilloscopio per la somma di sinusoide e onda quadra}
+	\label{fig:quadra_seno}
+	\end{center}
+\end{Figure}
 
 Infine si invia un segnale sinusoidale di frequenza $f = \SI{17.4 \pm 0.5}{kHz}$ e di ampiezza picco-picco $V_\text{in} = \SI{392 \pm 12}{mV}$ all'ingresso $B$ e un'onda quadra di frequenza inferiore a quella della sinusoide, $f = \SI{277 \pm 8}{Hz}$, e ampiezza picco-picco $V = \SI{1.82 \pm 0.05}{V}$ all'ingresso $A$. Si riporta in figura~\ref{fig:quadra_seno} l'istantanea dell'oscilloscopio per il segnale di uscita, e si osserva come la sinusoide segua l'andamento dell'onda quadra. 
 
-%\begin{Figure}
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\captionof{figure}{Istantanea dell'oscilloscopio per la somma di sinusoide e onda quadra}
-%	\label{fig:quadra_seno}
-%	\end{center}
-%\end{Figure}
+
 
 
 \end{multicols}
